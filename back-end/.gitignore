@@ -6,3 +6,4 @@
 
 # misc
 .env
+/src/configs/authProviders.config.js

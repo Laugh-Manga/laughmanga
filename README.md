@@ -70,11 +70,20 @@
 8. Create file .env
 9. npm install helmet --save                \----> helmet for protect header's information
 10. npm install morgan --save               \----> write log for dev
-11. npm install vhost --save                \----> create subdomains
-12. npm install mongoose --save             \----> package for working with database mongoDB.
-13. Connect to MongoDB Atlas database       
-14. npm install http-errors --save          \----> note errors for front-end dev
-15. npm install cors --save                 \----> enable CORS
+11. npm install mongoose --save             \----> package for working with database mongoDB.
+12. Connect to MongoDB Atlas database       
+13. npm install cors --save                 \----> enable CORS
+14. npm install joi --save                  \----> validation
+15. npm install bcrypt --save               \----> A library to help hash passwords
+16. npm install jsonwebtoken --save         \----> A library to help create Token 
+17. npm install crypto --save               \----> A library to help create KEY_SECRET
+18. npm install redis --save                \----> Use cache for JWT
+19. npm install ioredis --save              \----> connect and work with redis cloud
+20. npm install passport --save
+                passport-facebook --save
+                passport-google-oauth --save
+                passport-github2  --save              \----> auth with Social Media
+21. npm install cookie-parser               \----> use cookie to store Refresh Token to client
 
 ***
 # **FRONT-END:::: laughmanga:8000**

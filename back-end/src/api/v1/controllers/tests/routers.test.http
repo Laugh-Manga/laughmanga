@@ -1,0 +1,44 @@
+### Homepage
+GET https://localhost:8080
+
+### API Homepage
+GET https://localhost:8080/api/v1
+
+### Register user
+POST https://localhost:8080/api/v1/register
+content-type: application/json
+
+{
+    "userName": "example_test4",
+    "password": "password-04"
+}
+
+### Login user
+POST https://localhost:8080/api/v1/login
+content-type: application/json
+
+{
+    "userName": "exaMPle_test2",
+    "password": "password-02"
+}
+
+### Logout user
+DELETE  https://localhost:8080/api/v1/logout
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDIiLCJyb2xlIjpmYWxzZSwiaWF0IjoxNjU4NTkwODU0LCJleHAiOjE2OTAxNDg0NTR9.cD8mTthtA4DcFRWi9TjpfRcxz7YR1P8-wX7LUaTZqn8
+
+### Get new refeshToken and new accessToken
+POST https://localhost:8080/api/v1/refesh-token
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDIiLCJyb2xlIjpmYWxzZSwiaWF0IjoxNjU4NTkxNjcxLCJleHAiOjE2OTAxNDkyNzF9.d8cS009UKZTtmIn327pRHD1sG8q6fjMETwrXZE0l1kE
+
+### Get list users
+GET https://localhost:8080/api/v1/getListUsers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDIiLCJyb2xlIjpmYWxzZSwiaWF0IjoxNjU4NTkxNjkzLCJleHAiOjE2NTg1OTUyOTN9.2TXA3EtfIRcv07saT7x2PdaxyE7bvqAUQ5N9aVjRqTE
+
+### Login with facebook (Use browser to get this address)
+GET https://localhost:8080/api/v1/auth/facebook
+
+### Login with google (Use browser to get this address)
+GET https://localhost:8080/api/v1/auth/google
+
+### Login with github (Use browser to get this address)
+GET https://localhost:8080/api/v1/auth/github

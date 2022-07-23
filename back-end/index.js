@@ -3,52 +3,51 @@ const app = express()
 const dotenv = require('dotenv')
 const helmet = require('helmet')
 const morgan = require('morgan')
-const vhost = require('vhost')
 const api = require('./src/api/v1/routers/index')
-const mongoose = require('mongoose')
-const createError = require('http-errors')
 const cors = require('cors')
+const throwError = require('./src/api/v1/helpers/throwError.hepler')
+const https = require('https')
+const options = require('./src/configs/ssl.config')
+const cookieParser = require('cookie-parser')
+
+// Connect to MongoBD
+require('./src/api/v1/helpers/connectToMongoBD.helper')
 
 dotenv.config()
 app.set('port', process.env.PORT || 8000)
 
+app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
-app.use(helmet())
+app.use(express.urlencoded({extended: true}))
+// app.use(helmet())
 app.use(morgan('dev'))
-app.use(vhost('api.*', api))
 
-// connect to Database
-mongoose
-    .connect(process.env.MONGODB_URL)
-    .then((result) => {
-        console.log('Connect to MongoDB successfully!')
-    })
-    .catch((err) => {
-        console.error('Connect to MongoDB failed!', err)
-    })
-
-// Home page
-app.get('/', (req, res) => {
-    res.send('api/localhost:' + app.get('port'))
+// API Homepage
+app.get('/', (req, res, next) => {
+    res.send(
+        'Welcome to LaughManga project! Access to https://localhost:' +
+            process.env.PORT +
+            '/api/v1 to explore! Have fun!',
+    )
 })
 
-// API path
-app.use(api)
+// API Homepage
+app.use('/api/v1', api)
 
 // Catch error 404 and 500
-app.use((err, req, res, next) => {
-    next(createError.InternalServerError('500'))
+app.use((req, res, next) => {
+    throwError(404, "This page isn't found!", res)
 })
 
-app.use((req, res, next) => {
-    next(createError.NotFound('404'))
+app.use((err, req, res, next) => {
+    throwError(500, 'Server Error!', res, err)
 })
 
 // Run server
-app.listen(app.get('port'), function () {
+https.createServer(options, app).listen(app.get('port'), function () {
     console.log(
-        'Express started on http://localhost:' +
+        'Express started on https://localhost:' +
             app.get('port') +
             '; press Ctrl-C to terminate',
     )
