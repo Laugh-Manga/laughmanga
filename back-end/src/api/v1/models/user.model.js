@@ -1,24 +1,40 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+const crypto = require('crypto')
 const generateOTP = require('../helpers/OTP.helpers')
 
-const userSchema = mongoose.Schema({
-    userName: {
-        type: String,
-        lowercase: true,
-        unique: true,
+const userSchema = mongoose.Schema(
+    {
+        userName: {
+            type: String,
+            lowercase: true,
+            unique: true,
+        },
+        email: {
+            type: String,
+            default: null,
+        },
+        password: {
+            type: String,
+        },
+        showName: {
+            type: String,
+        },
+        role: {
+            type: Boolean,
+            default: false,
+        },
+        resetPasswordToken: {
+            type: String,
+            default: undefined,
+        },
+        resetPasswordExpires: {
+            type: Date,
+            default: undefined,
+        },
     },
-    password: {
-        type: String,
-    },
-    showName: {
-        type: String,
-    },
-    role: {
-        type: Boolean,
-        default: false,
-    },
-})
+    {timestamps: true},
+)
 
 // [middleware] before save in Database
 userSchema.pre('save', async function (next) {
@@ -41,6 +57,15 @@ userSchema.pre('save', async function (next) {
 userSchema.methods.checkPassword = async function (password) {
     try {
         return await bcrypt.compare(password, this.password)
+    } catch (error) {
+        next(error)
+    }
+}
+
+userSchema.methods.generatePasswordReset = async function (password) {
+    try {
+        this.resetPasswordToken = crypto.randomBytes(20).toString('hex')
+        this.resetPasswordExpires = Date.now() + 3600000 //expires in an hour
     } catch (error) {
         next(error)
     }

@@ -1,4 +1,4 @@
-# **BACK-END:::: api.laughmanga:8080**
+# **BACK-END:::: laughmanga:8080/api/v1**
 
 1. Download Visual Studio Code              \----> recommend
 2. NodeJS: https://nodejs.org/en/ -get v18.5.0
@@ -84,6 +84,8 @@
                 passport-google-oauth --save
                 passport-github2  --save              \----> auth with Social Media
 21. npm install cookie-parser               \----> use cookie to store Refresh Token to client
+22. npm install nodemailer --save           \----> send email
+23. npm install crypto --save               \----> create random token for reset Password
 
 ***
 # **FRONT-END:::: laughmanga:8000**

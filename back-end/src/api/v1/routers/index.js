@@ -1,6 +1,7 @@
 const express = require('express')
 const api = express.Router()
 const userRouter = require('./user.router')
+const adminRouter = require('./admin.router')
 const authSocialMediaRouter = require('./authSocialMedia.router')
 
 api.get('/', (req, res, next) => {
@@ -11,5 +12,6 @@ api.get('/', (req, res, next) => {
 
 userRouter(api)
 authSocialMediaRouter(api)
+adminRouter(api)
 
 module.exports = api
