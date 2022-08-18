@@ -7,7 +7,8 @@ const {
     login,
     logout,
     getListUsers,
-} = require('../services/user.sevice')
+    forgotPassword,
+} = require('../services/user.service')
 
 // Helper
 const throwError = require('../helpers/throwError.hepler')
@@ -121,6 +122,34 @@ var that = (module.exports = {
                 status: 'Loading data from MongoDB is successful!',
                 data: data,
             })
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    forgotPassword: async (req, res, next) => {
+        try {
+            const {error, data} = await forgotPassword(req.body)
+            if (error.validateError) {
+                return throwError(400, error.validateError, res)
+            } else if (error.unauthorizedError) {
+                return throwError(401, error.unauthorizedError, res)
+            } else {
+                if (data.emailNotExit) {
+                    return throwError(
+                        404,
+                        'The Email is not registered with us',
+                        res,
+                    )
+                } else if (data.emailConfirm) {
+                    return res.status(204).end()
+                } else {
+                    return res.status(202).json({
+                        status: 'Verification Email is sent successful! Please check your email.',
+                        data: data.emailData,
+                    })
+                }
+            }
         } catch (error) {
             next(error)
         }

@@ -9,8 +9,9 @@ POST https://localhost:8080/api/v1/register
 content-type: application/json
 
 {
-    "userName": "example_test4",
-    "password": "password-04"
+    "userName": "example_test23",
+    "password": "password-07",
+    "email": "sdsjdh@gmail.com"
 }
 
 ### Login user
@@ -18,8 +19,8 @@ POST https://localhost:8080/api/v1/login
 content-type: application/json
 
 {
-    "userName": "exaMPle_test2",
-    "password": "password-02"
+    "userName": "example_test1",
+    "password": "password-01"
 }
 
 ### Logout user
@@ -31,7 +32,7 @@ POST https://localhost:8080/api/v1/refesh-token
 Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDIiLCJyb2xlIjpmYWxzZSwiaWF0IjoxNjU4NTkxNjcxLCJleHAiOjE2OTAxNDkyNzF9.d8cS009UKZTtmIn327pRHD1sG8q6fjMETwrXZE0l1kE
 
 ### Get list users
-GET https://localhost:8080/api/v1/getListUsers
+GET https://localhost:8080/api/v1/get-list-users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDIiLCJyb2xlIjpmYWxzZSwiaWF0IjoxNjU4NTkxNjkzLCJleHAiOjE2NTg1OTUyOTN9.2TXA3EtfIRcv07saT7x2PdaxyE7bvqAUQ5N9aVjRqTE
 
 ### Login with facebook (Use browser to get this address)
@@ -42,3 +43,69 @@ GET https://localhost:8080/api/v1/auth/google
 
 ### Login with github (Use browser to get this address)
 GET https://localhost:8080/api/v1/auth/github
+
+### Send email with link to a reset password form on the front end application
+PUT https://localhost:8080/api/v1/forgot-password
+content-type: application/json
+
+{
+    "email": "shichibukai.sf@gmail.com"
+}
+
+### Get new refeshToken and new accessToken from font-end form
+PUT https://localhost:8080/api/v1/forgot-password
+content-type: application/json
+
+{
+    "token":"c509182cc395153e20deaf0e769e40c60c92daeb",
+    "newPassword":"password"
+}
+
+### Admin create new user
+POST https://localhost:8080/api/v1/admin/add-user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NjAwNjUyMDYsImV4cCI6MTY2MDA2ODgwNn0._7eRFyWEywSWJWfaNPjDjlQDbyAuUEC5NtUXOCNPY60
+content-type: application/json
+
+{
+    "userName": "example_test2",
+    "email": "2h3441233d@gmail.com",
+    "password": "pasweqsword-01",
+    "showName": "Hahah"
+}
+
+### Admin get list user
+GET https://localhost:8080/api/v1/admin/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NjAwNjM5MzgsImV4cCI6MTY2MDA2NzUzOH0.vsrLDruSYFo-nLP4ouT0a2CqXUuMgW1e6gV8OXfwoqY
+
+### Admin get user
+GET https://localhost:8080/api/v1/admin/users/62f142444dedaf943b1f9959
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NjAwNjM5MzgsImV4cCI6MTY2MDA2NzUzOH0.vsrLDruSYFo-nLP4ouT0a2CqXUuMgW1e6gV8OXfwoqY
+
+### Admin update user
+PUT https://localhost:8080/api/v1/admin/users/62f1423e4dedaf943b1f9956
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NjAwNjM5MzgsImV4cCI6MTY2MDA2NzUzOH0.vsrLDruSYFo-nLP4ouT0a2CqXUuMgW1e6gV8OXfwoqY
+content-type: application/json
+
+{
+    "userName": "example_test2",
+    "email": "shadh1s4343233121ad@gmail.com",
+    "password": "password-01",
+    "showName": "Haha1122232h"
+}
+
+### Admin delete user
+DELETE  https://localhost:8080/api/v1/admin/users/62f142ae4dedaf943b1f9961
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NTk5NzgzMzgsImV4cCI6MTY1OTk4MTkzOH0.I8vzzaPQzbK7UIKGYo4CWl5p0cYIRzUs82Gfa6mb4Qc
+
+### Admin get list refresh token of all user from redis
+GET https://localhost:8080/api/v1/admin/refresh-tokens/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NjAwNjEzNDgsImV4cCI6MTY2MDA2NDk0OH0.s-l6FT8fKZmUBNA2k2WgkqMMV6B3a-Dg9NE6j38b7S0
+
+### Admin get refresh token of user from redis
+GET https://localhost:8080/api/v1/admin/refresh-tokens/example_test1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NjAwNjEzNDgsImV4cCI6MTY2MDA2NDk0OH0.s-l6FT8fKZmUBNA2k2WgkqMMV6B3a-Dg9NE6j38b7S0
+
+### Admin delete refresh token of user from redis
+DELETE  https://localhost:8080/api/v1/admin/refresh-tokens/example_test2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImV4YW1wbGVfdGVzdDEiLCJyb2xlIjp0cnVlLCJpYXQiOjE2NjAwNjEzNDgsImV4cCI6MTY2MDA2NDk0OH0.s-l6FT8fKZmUBNA2k2WgkqMMV6B3a-Dg9NE6j38b7S0
+

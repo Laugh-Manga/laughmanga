@@ -12,19 +12,25 @@ redis.on('ready', () => {
 })
 
 async function getAllKeys() {
+    let refreshTokens = {}
     const keys = await redis.keys('*')
-    console.log('keys', keys)
+    for (key in keys) {
+        refreshToken = await redis.get(keys[key])
+        refreshTokens[`${keys[key]}`] = refreshToken
+    }
+    return refreshTokens
 }
 
 async function delCache(key) {
-    const keys = await redis.del(key)
-    console.log(`Delete ${key} is successful!`)
-    getAllKeys()
+    const success = await redis.del(key)
+    if (success) {
+        console.log(`Delete ${key} is successful!`)
+        return key
+    } else {
+        console.log(`Can't delete! ${key} isn't in Redis cloud!`)
+        return null
+    }
 }
-
-// get all data and delete data from Redis Cloud
-// getAllKeys()
-// delCache('github93632688')
 
 module.exports = {
     redis,

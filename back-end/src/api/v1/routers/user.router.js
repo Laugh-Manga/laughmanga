@@ -4,6 +4,7 @@ const {
     login,
     logout,
     getListUsers,
+    forgotPassword,
 } = require('../controllers/user.controller')
 
 const {
@@ -20,5 +21,7 @@ module.exports = (router) => {
 
     router.delete('/logout', verifyRefreshToken, logout)
 
-    router.get('/getListUsers', verifyAccessToken, getListUsers)
+    router.get('/get-list-users', verifyAccessToken, getListUsers)
+
+    router.put('/forgot-password', forgotPassword)
 }
